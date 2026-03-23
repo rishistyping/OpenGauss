@@ -1,0 +1,10 @@
+name = "gauss-proof-sandbox"
+version = "0.1.0"
+defaultTargets = ["gauss-proof-sandbox"]
+
+[[lean_lib]]
+name = "GaussProofSandbox"
+
+[[lean_exe]]
+name = "gauss-proof-sandbox"
+root = "Main"
