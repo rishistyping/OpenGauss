@@ -1,0 +1,173 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage[hidelinks]{hyperref}
+\usepackage[super]{cite}
+\emergencystretch=3em
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt minus 1pt}
+
+\title{\vspace{-1.5em}\textbf{One Postulate}}
+\author{Emad Mostaque\\[2pt]{\normalsize Intelligent Internet}}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\vspace{-1.5em}
+
+\begin{abstract}
+\noindent Einstein's derivation of special relativity (1905) uses two postulates: the relativity principle and the invariance of the speed of light. The second is an empirical input: a physical observation about a particular phenomenon. For Einstein, who held that the laws of physics should contain no structure put in by hand, this was a concession. We show the concession was unnecessary. The relativity principle determines a one-parameter family of kinematic algebras $\mathfrak{h}_\kappa$. The algebra's own canonical invariant, the Killing form, fixes the parameter. At $\kappa = 0$ (Galilean) the Killing form degenerates on the boost sector: the algebra determines a conformal class on velocity space but not a metric. At $\kappa < 0$ (Euclidean) the boosts are compact: no causal ordering exists. Only at $\kappa > 0$ is the Killing form non-degenerate, the metric Lorentzian, and spacetime unified. The invariant speed is finite and real. Observation calibrates its value; the algebra determines its existence. Einstein needed one postulate, not two.
+\end{abstract}
+
+\subsection*{The postulate}
+
+Einstein built special relativity on two principles \cite{Einstein1905}. The first is structural:
+
+\textsc{Postulate} (relativity principle, 1905)\textsc{.}\quad\emph{The laws of physics take the same form in all inertial frames.}
+
+\smallskip
+For Einstein this was a prohibition: no preferred frame, no external structure that the theory does not generate. The framework must be self-contained. Special relativity came from removing absolute simultaneity. General covariance came from removing the preferred coordinate system. Each advance eliminated a background structure that the previous framework assumed.
+
+The second postulate is empirical: light travels at a finite speed $c$ that is the same in all frames. It is an observation about a particular physical phenomenon, imported into the foundations. Every treatment since Ignatowski \cite{Ignatowski1910} has shown that the first postulate alone determines a one-parameter family of kinematic algebras; every treatment has concluded that the parameter cannot be fixed without the second postulate or equivalent empirical input \cite{Pauli1921,BerziGorini1969,LevyLeblond1976,Mermin1984,Pal2003,Silagadze2007,Drory2015}. Pauli \cite{Pauli1921}: ``Nothing can naturally be said about the sign, magnitude and physical meaning of~[$\kappa$].''
+
+Einstein used a physical observation where a computation suffices.
+
+
+\subsection*{Classification}
+
+The relativity principle, through homogeneity, isotropy, and group composition \cite{LevyLeblond1976}, determines a one-parameter family of kinematic algebras $\mathfrak{h}_\kappa$ \cite{Ignatowski1910,BerziGorini1969,BacryLL1968}:
+\[
+t' = \gamma(t-\kappa vx),\qquad x' = \gamma(x-vt),\qquad \gamma = (1-\kappa v^2)^{-1/2},
+\]
+with $\kappa \in \mathbb{R}$. Three branches: $\mathfrak{so}(3,1)$ at $\kappa > 0$ (Lorentz), $\mathfrak{iso}(3)$ at $\kappa = 0$ (Galileo), $\mathfrak{so}(4)$ at $\kappa < 0$ (Euclid). The homogeneous algebra has brackets $[J_i,J_j] = \epsilon_{ijk}J_k$,\; $[J_i,K_j] = \epsilon_{ijk}K_k$,\; $[K_i,K_j] = -\kappa\,\epsilon_{ijk}J_k$.
+
+Every Lie algebra carries a canonical invariant: the Killing form $B(X,Y) = \mathrm{tr}(\mathrm{ad}_X\!\circ\,\mathrm{ad}_Y)$, determined entirely by the structure constants. Every Lie algebra has exactly one.
+
+$(\mathrm{ad}_{K_1})^2$ maps $J_2 \!\to\! K_3 \!\to\! \kappa J_2$,\; $J_3 \!\to\! {-}K_2 \!\to\! \kappa J_3$,\; $K_2 \!\to\! {-}\kappa J_3 \!\to\! \kappa K_2$,\; $K_3 \!\to\! \kappa J_2 \!\to\! \kappa K_3$;\, trace~$4\kappa$. Similarly $(\mathrm{ad}_{J_1})^2$: trace~$-4$. Cross terms vanish. Result:
+\[
+B \;=\; \mathrm{diag}(-4I_3,\;\;4\kappa\, I_3).
+\]
+
+The velocity space is the coset $H_\kappa/\mathrm{SO}(3)$, with tangent space at the identity spanned by the boosts~$K_i$. An $H_\kappa$-invariant metric on this space is, at the origin, an $\mathrm{SO}(3)$-invariant bilinear form on the boost subspace. Since the $K_i$ transform as an irreducible $\mathrm{SO}(3)$ 3-vector, Schur's lemma gives a unique such form up to a positive constant:~$\delta_{ij}$. This holds at every value of $\kappa$. For $\kappa \neq 0$, the Killing form $B(K_i, K_j) = 4\kappa\,\delta_{ij}$ fixes this constant: the scale is set by $\kappa$ itself, the squared invariant speed $V^2 = 1/\kappa$. For $\kappa = 0$, the Killing form vanishes on the boosts and the scale is undetermined. The algebra determines a conformal class on velocity space, not a metric.
+
+The algebra also determines an invariant spacetime metric $g \propto \mathrm{diag}(1,-\kappa,-\kappa,-\kappa)$.
+
+
+\subsection*{Selection}
+
+\textbf{$\kappa < 0$: no causal structure.}
+
+\smallskip
+The invariant metric has Euclidean signature: no lightcone, no distinction between timelike and spacelike directions, no causal ordering. The homogeneous group is compact ($\mathfrak{so}(4)$) and collinear boosts are periodic.
+
+\bigskip
+\textbf{$\kappa = 0$: the algebra cannot unify space and time.}
+
+\smallskip
+At $\kappa = 0$, the boosts commute: $[K_i,K_j] = 0$. The Killing form degenerates on the boost sector: $B(K_i,K_j) = 0$, while $B(J_i,J_j) = -4\delta_{ij}$ remains non-degenerate. The degeneracy falls on the generators the relativity postulate specifically requires: the boosts that connect inertial frames.
+
+As shown above, Schur's lemma gives $\delta_{ij}$ on velocity space at every $\kappa$, but at $\kappa = 0$ the Killing form vanishes and the scale is undetermined: only a conformal class is fixed. The undetermined scale is the squared invariant speed $V^2 = 1/\kappa$. The algebra does not determine whether an invariant speed exists or what its value is.
+
+The same failure occurs at the spacetime level. At $\kappa \neq 0$ the homogeneous group acts irreducibly on $\mathbb{R}^4$: by Schur's lemma there is a unique invariant bilinear form, and it is the spacetime metric. At $\kappa = 0$ the action is reducible: $t$ is invariant under boosts, so the representation decomposes into a 1-dimensional time sector and a 3-dimensional space sector. Schur's lemma does not apply to the full space. The only invariant form is $dt^2$. The covector $dt$ is invariant under the full homogeneous algebra; absolute time is not an approximation but a fixed point of the symmetry. At $\kappa > 0$ no invariant covector exists: the only frame-independent quantity is the quadratic interval $ds^2$.
+
+Absolute time in Galilean mechanics is external structure: a metric component ($dt^2$) that the algebra preserves but does not generate, and that privileges one direction over the others. This is the kind of background structure that Einstein's programme was designed to eliminate. At $\kappa > 0$ the algebra produces a non-degenerate Lorentzian metric; at $\kappa = 0$ it produces only $dt^2$. The spatial metric must be supplied from outside.
+
+All four symptoms trace to the same root: $[K_i,K_j] = 0$. The vanishing commutator makes the Killing form degenerate, the velocity-space metric vanish, the spacetime representation reducible, and the spacetime metric degenerate to $dt^2$. Galilean mechanics is the low-velocity limit of Lorentzian kinematics, not evidence for a different algebra. And $\kappa = 0$ is a different algebra: the limit $\kappa \to 0$ is an In\"on\"u--Wigner contraction at which the structure type changes discontinuously.
+
+\bigskip
+\textbf{$\kappa > 0$: the postulate is fully implemented.}
+
+\smallskip
+The Killing form is non-degenerate: $B = \mathrm{diag}(-4I_3,\;4\kappa\,I_3)$, with signature $(3,3)$. The algebra determines a metric on velocity space ($B(K_i,K_j) = 4\kappa\,\delta_{ij}$, by Schur's lemma on the coset) and a Lorentzian spacetime metric (by Schur's lemma on the irreducible 4-dimensional representation). Space and time are unified. A finite real invariant speed $V = 1/\sqrt{\kappa}$ exists. No background structure is needed. The algebra determines everything.
+
+
+\subsection*{Discussion}
+
+The postulate excludes $\kappa \leq 0$ by different mechanisms:
+
+\smallskip
+\hangindent=1.5em\hangafter=0\noindent
+$\kappa < 0$:\; The invariant metric is Euclidean. No causal structure.
+
+\smallskip
+\hangindent=1.5em\hangafter=0\noindent
+$\kappa = 0$:\; The Killing form degenerates on the boost sector. The algebra determines a conformal class on velocity space but not a metric: the invariant speed is undetermined. The spacetime representation is reducible and the invariant metric degenerates to $dt^2$. Space and time are not unified.
+
+\smallskip
+\hangindent=1.5em\hangafter=0\noindent
+$\kappa > 0$:\; The Killing form is non-degenerate. The spacetime representation is irreducible. The algebra determines metrics on both velocity space and spacetime. The invariant speed is finite and real.
+
+\medskip
+Only $\kappa > 0$ yields a framework in which the relativity postulate is fully implemented: the algebra produces a non-degenerate metric, the boosts unify space and time, and no external structure is required.
+
+Wilhelm Killing introduced the Killing form in 1888 \cite{Killing1888}. Ignatowski identified the one-parameter family in 1910 \cite{Ignatowski1910}. The computation that connects them requires only the structure constants and a trace. The value of the invariant speed~$V$ is parametric. Its existence is structural.
+
+Observation is required only to calibrate the numerical value of~$V$, not to determine the kinematic structure. Einstein's second postulate, the invariance of a specific speed, is an empirical input where the algebra already provides the answer. He needed one postulate, not two.
+
+
+\begin{thebibliography}{99}
+\small
+
+\bibitem{Einstein1905}
+A.~Einstein,
+``Zur Elektrodynamik bewegter K\"orper,''
+\textit{Ann.\ Phys.}\ \textbf{17}, 891 (1905).
+
+\bibitem{Killing1888}
+W.~Killing,
+``Die Zusammensetzung der stetigen endlichen Transformationsgruppen,''
+\textit{Math.\ Ann.}\ \textbf{31}, 252 (1888).
+
+\bibitem{Ignatowski1910}
+W.~von Ignatowski,
+``Einige allgemeine Bemerkungen \"uber das Relativit\"atsprinzip,''
+\textit{Phys.\ Z.}\ \textbf{11}, 972 (1910).
+
+\bibitem{Pauli1921}
+W.~Pauli,
+\textit{Theory of Relativity},
+Teubner, Leipzig (1921); English transl.\ Pergamon (1958).
+
+\bibitem{BacryLL1968}
+H.~Bacry and J.-M.~L\'evy-Leblond,
+``Possible kinematics,''
+\textit{J.\ Math.\ Phys.}\ \textbf{9}, 1605 (1968).
+
+\bibitem{BerziGorini1969}
+V.~Berzi and V.~Gorini,
+``Reciprocity principle and the Lorentz transformations,''
+\textit{J.\ Math.\ Phys.}\ \textbf{10}, 1518 (1969).
+
+\bibitem{LevyLeblond1976}
+J.-M.~L\'evy-Leblond,
+``One more derivation of the Lorentz transformation,''
+\textit{Am.\ J.\ Phys.}\ \textbf{44}, 271 (1976).
+
+\bibitem{Mermin1984}
+N.~D.~Mermin,
+``Relativity without light,''
+\textit{Am.\ J.\ Phys.}\ \textbf{52}, 119 (1984).
+
+\bibitem{Pal2003}
+P.~B.~Pal,
+``Nothing but relativity,''
+\textit{Eur.\ J.\ Phys.}\ \textbf{24}, 315 (2003).
+
+\bibitem{Silagadze2007}
+Z.~K.~Silagadze,
+``Relativity without tears,''
+\textit{Acta Phys.\ Pol.\ B}\ \textbf{39}, 811 (2008).
+
+\bibitem{Drory2015}
+A.~Drory,
+``The necessity of the second postulate in special relativity,''
+\textit{Stud.\ Hist.\ Phil.\ Mod.\ Phys.}\ \textbf{51}, 57 (2015).
+
+\end{thebibliography}
+
+\end{document}
