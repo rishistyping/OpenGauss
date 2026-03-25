@@ -1,11 +1,277 @@
-\section{Declaration Ledger}
+\section{Phase 1 Declaration Ledger}
+
+% Deferred and intentionally omitted from the phase-1 import graph:
+% `OnePostulate.classificationDerivationDeferred`
+% `OnePostulate.classificationDerivation_deferred`
+
+\subsection{Classification}
+
+\subsubsection{Foundations: \texttt{OnePostulate/Basic.lean}}
+\begin{enumerate}
+\item \texttt{OnePostulate.SpatialDim}\label{OnePostulate.SpatialDim}\\
+Kind: abbrev.\\
+Depends on: none.
+
+\item \texttt{OnePostulate.SpacetimeDim}\label{OnePostulate.SpacetimeDim}\\
+Kind: abbrev.\\
+Depends on: none.
+
+\item \texttt{OnePostulate.AdjointDim}\label{OnePostulate.AdjointDim}\\
+Kind: abbrev.\\
+Depends on: none.
+
+\item \texttt{OnePostulate.SpatialIndex}\label{OnePostulate.SpatialIndex}\\
+Kind: abbrev.\\
+Depends on: \texttt{OnePostulate.SpatialDim}.
+
+\item \texttt{OnePostulate.SpacetimeIndex}\label{OnePostulate.SpacetimeIndex}\\
+Kind: abbrev.\\
+Depends on: \texttt{OnePostulate.SpacetimeDim}.
+
+\item \texttt{OnePostulate.AdjointIndex}\label{OnePostulate.AdjointIndex}\\
+Kind: abbrev.\\
+Depends on: \texttt{OnePostulate.AdjointDim}.
+
+\item \texttt{OnePostulate.RealSquareMatrix}\label{OnePostulate.RealSquareMatrix}\\
+Kind: abbrev.\\
+Depends on: none.
+
+\item \texttt{OnePostulate.BasisTag}\label{OnePostulate.BasisTag}\\
+Kind: inductive.\\
+Depends on: \texttt{OnePostulate.SpatialIndex}.
+
+\item \texttt{OnePostulate.Branch}\label{OnePostulate.Branch}\\
+Kind: inductive.\\
+Depends on: none.
+
+\item \texttt{OnePostulate.leviCivita}\label{OnePostulate.leviCivita}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.SpatialIndex}.
+
+\item \texttt{OnePostulate.classifyKappa}\label{OnePostulate.classifyKappa}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.Branch}.
+
+\item \texttt{OnePostulate.invariantSpeedSquared}\label{OnePostulate.invariantSpeedSquared}\\
+Kind: definition.\\
+Depends on: none.
+\end{enumerate}
+
+\subsubsection{Concrete Matrix Model: \texttt{OnePostulate/SpacetimeMatrices.lean}}
+\begin{enumerate}
+\item \texttt{OnePostulate.spacetimeMetricMatrix}\label{OnePostulate.spacetimeMetricMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpacetimeDim}.
+
+\item \texttt{OnePostulate.spatialMetricMatrix}\label{OnePostulate.spatialMetricMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpatialDim}.
+
+\item \texttt{OnePostulate.matrixBracket}\label{OnePostulate.matrixBracket}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpacetimeDim}.
+
+\item \texttt{OnePostulate.rotMatrix}\label{OnePostulate.rotMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpacetimeDim}, \texttt{OnePostulate.SpatialIndex}.
+
+\item \texttt{OnePostulate.boostMatrix}\label{OnePostulate.boostMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpacetimeDim}, \texttt{OnePostulate.SpatialIndex}.
+
+\item \texttt{OnePostulate.matrix\_bracket\_JJ}\label{OnePostulate.matrix_bracket_JJ}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.matrixBracket}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.leviCivita}.
+
+\item \texttt{OnePostulate.matrix\_bracket\_JK}\label{OnePostulate.matrix_bracket_JK}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.matrixBracket}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}, \texttt{OnePostulate.leviCivita}.
+
+\item \texttt{OnePostulate.matrix\_bracket\_KK}\label{OnePostulate.matrix_bracket_KK}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.matrixBracket}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}, \texttt{OnePostulate.leviCivita}.
+\end{enumerate}
+
+\subsubsection{Kinematic Algebra: \texttt{OnePostulate/KinematicAlgebra.lean}}
+\begin{enumerate}
+\item \texttt{OnePostulate.KinematicAlgebra}\label{OnePostulate.KinematicAlgebra}\\
+Kind: abbrev.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpacetimeDim}.
+
+\item \texttt{OnePostulate.rotationGenerator}\label{OnePostulate.rotationGenerator}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.KinematicAlgebra}, \texttt{OnePostulate.rotMatrix}.
+
+\item \texttt{OnePostulate.boostGenerator}\label{OnePostulate.boostGenerator}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.KinematicAlgebra}, \texttt{OnePostulate.boostMatrix}.
+
+\item \texttt{OnePostulate.basisGenerator}\label{OnePostulate.basisGenerator}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.BasisTag}, \texttt{OnePostulate.rotationGenerator}, \texttt{OnePostulate.boostGenerator}.
+
+\item \texttt{OnePostulate.kinematic\_bracket\_table}\label{OnePostulate.kinematic_bracket_table}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.rotationGenerator}, \texttt{OnePostulate.boostGenerator}, \texttt{OnePostulate.leviCivita}, \texttt{OnePostulate.matrixBracket}, \texttt{OnePostulate.matrix_bracket_JJ}, \texttt{OnePostulate.matrix_bracket_JK}, \texttt{OnePostulate.matrix_bracket_KK}.
+
+\item \texttt{OnePostulate.kinematic\_bracket\_jacobi}\label{OnePostulate.kinematic_bracket_jacobi}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.KinematicAlgebra}.
+
+\item \texttt{OnePostulate.boostCommutatorMatrix}\label{OnePostulate.boostCommutatorMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpatialDim}.
+
+\item \texttt{OnePostulate.adjointTraceModel}\label{OnePostulate.adjointTraceModel}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.AdjointDim}.
+\end{enumerate}
+
+\subsubsection{Killing Form: \texttt{OnePostulate/KillingForm.lean}}
+\begin{enumerate}
+\item \texttt{OnePostulate.adjointBasisTag}\label{OnePostulate.adjointBasisTag}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.AdjointIndex}, \texttt{OnePostulate.BasisTag}.
+
+\item \texttt{OnePostulate.adjointMatrix}\label{OnePostulate.adjointMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.BasisTag}, \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.AdjointDim}.
+
+\item \texttt{OnePostulate.killingFormEntry}\label{OnePostulate.killingFormEntry}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.adjointMatrix}.
+
+\item \texttt{OnePostulate.boostKillingBlock}\label{OnePostulate.boostKillingBlock}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.killingFormEntry}.
+
+\item \texttt{OnePostulate.killingFormMatrix}\label{OnePostulate.killingFormMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.adjointBasisTag}, \texttt{OnePostulate.killingFormEntry}.
+
+\item \texttt{OnePostulate.killing\_form\_diag}\label{OnePostulate.killing_form_diag}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.killingFormMatrix}, \texttt{OnePostulate.killingFormEntry}, \texttt{OnePostulate.adjointBasisTag}, \texttt{OnePostulate.adjointMatrix}.
+
+\item \texttt{OnePostulate.boost\_killing\_form\_eq}\label{OnePostulate.boost_killing_form_eq}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.boostKillingBlock}, \texttt{OnePostulate.killingFormEntry}, \texttt{OnePostulate.adjointMatrix}.
+
+\item \texttt{OnePostulate.boost\_killing\_nondegenerate\_iff\_kappa\_ne\_zero}\label{OnePostulate.boost_killing_nondegenerate_iff_kappa_ne_zero}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.boostKillingBlock}, \texttt{OnePostulate.boost_killing_form_eq}.
+
+\item \texttt{OnePostulate.killingFormMatrix\_matches\_adjoint\_trace\_model}\label{OnePostulate.killingFormMatrix_matches_adjoint_trace_model}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.killingFormMatrix}, \texttt{OnePostulate.adjointTraceModel}, \texttt{OnePostulate.killing_form_diag}.
+\end{enumerate}
+
+\subsubsection{Velocity Space: \texttt{OnePostulate/VelocitySpace.lean}}
+\begin{enumerate}
+\item \texttt{OnePostulate.boostRotationAction}\label{OnePostulate.boostRotationAction}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpatialDim}, \texttt{OnePostulate.SpatialIndex}.
+
+\item \texttt{OnePostulate.velocityMetricMatrix}\label{OnePostulate.velocityMetricMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.boostKillingBlock}.
+
+\item \texttt{OnePostulate.boost\_invariant\_form\_scalar}\label{OnePostulate.boost_invariant_form_scalar}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.boostRotationAction}.
+
+\item \texttt{OnePostulate.killing\_restricts\_to\_metric}\label{OnePostulate.killing_restricts_to_metric}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.boost_killing_form_eq}.
+
+\item \texttt{OnePostulate.boost\_metric\_fixed\_by\_killing\_if\_kappa\_ne\_zero}\label{OnePostulate.boost_metric_fixed_by_killing_if_kappa_ne_zero}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.boostRotationAction}, \texttt{OnePostulate.boost_invariant_form_scalar}, \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.killing_restricts_to_metric}.
+
+\item \texttt{OnePostulate.velocityMetricMatrix\_at\_zero}\label{OnePostulate.velocityMetricMatrix_at_zero}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.killing_restricts_to_metric}.
+
+\item \texttt{OnePostulate.invariantSpeedSquared\_formula}\label{OnePostulate.invariantSpeedSquared_formula}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.invariantSpeedSquared}.
+\end{enumerate}
+
+\subsubsection{Spacetime Representation: \texttt{OnePostulate/SpacetimeRepresentation.lean}}
+\begin{enumerate}
+\item \texttt{OnePostulate.spacetime\_metric}\label{OnePostulate.spacetime_metric}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpacetimeDim}.
+
+\item \texttt{OnePostulate.timeLineSubmodule}\label{OnePostulate.timeLineSubmodule}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.SpacetimeIndex}.
+
+\item \texttt{OnePostulate.lorentzCongruenceMatrix}\label{OnePostulate.lorentzCongruenceMatrix}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.RealSquareMatrix}, \texttt{OnePostulate.SpacetimeDim}.
+
+\item \texttt{OnePostulate.spacetime\_metric\_eq\_diagonal}\label{OnePostulate.spacetime_metric_eq_diagonal}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.spacetime_metric}.
+
+\item \texttt{OnePostulate.spacetime\_metric\_invariant}\label{OnePostulate.spacetime_metric_invariant}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.spacetime_metric}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}.
+
+\item \texttt{OnePostulate.reducible\_of\_kappa\_zero}\label{OnePostulate.reducible_of_kappa_zero}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.timeLineSubmodule}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}.
+
+\item \texttt{OnePostulate.spacetime\_metric\_degenerate\_of\_kappa\_zero}\label{OnePostulate.spacetime_metric_degenerate_of_kappa_zero}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.spacetime_metric}, \texttt{OnePostulate.spacetime_metric_eq_diagonal}.
+
+\item \texttt{OnePostulate.spacetime\_metric\_congruent\_stdLorentz\_of\_kappa\_pos}\label{OnePostulate.spacetime_metric_congruent_stdLorentz_of_kappa_pos}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.lorentzCongruenceMatrix}, \texttt{OnePostulate.spacetime_metric}, \texttt{OnePostulate.spacetime_metric_eq_diagonal}.
+\end{enumerate}
+
+\subsection{Selection}
+
+% Omitted from the main inventory as a restatement alias:
+% `OnePostulate.positive_branch_is_phase1_target`
+
+\subsubsection{Selection Layer: \texttt{OnePostulate/Selection.lean}}
+\begin{enumerate}
+\item \texttt{OnePostulate.preferredBranch}\label{OnePostulate.preferredBranch}\\
+Kind: definition.\\
+Depends on: \texttt{OnePostulate.classifyKappa}.
+
+\item \texttt{OnePostulate.positive\_kappa\_selects\_lorentz}\label{OnePostulate.positive_kappa_selects_lorentz}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.preferredBranch}.
+
+\item \texttt{OnePostulate.zero\_kappa\_selects\_galilean}\label{OnePostulate.zero_kappa_selects_galilean}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.preferredBranch}.
+
+\item \texttt{OnePostulate.negative\_kappa\_selects\_euclidean}\label{OnePostulate.negative_kappa_selects_euclidean}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.preferredBranch}.
+
+\item \texttt{OnePostulate.negative\_kappa\_no\_nonzero\_null\_vectors}\label{OnePostulate.negative_kappa_no_nonzero_null_vectors}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.spacetime_metric}.
+
+\item \texttt{OnePostulate.positive\_kappa\_gives\_finite\_real\_invariant\_speed}\label{OnePostulate.positive_kappa_gives_finite_real_invariant_speed}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.invariantSpeedSquared_formula}.
+
+\item \texttt{OnePostulate.selection\_of\_positive\_kappa}\label{OnePostulate.selection_of_positive_kappa}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.positive_kappa_selects_lorentz}, \texttt{OnePostulate.boost_killing_nondegenerate_iff_kappa_ne_zero}, \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.spacetime_metric_congruent_stdLorentz_of_kappa_pos}, \texttt{OnePostulate.positive_kappa_gives_finite_real_invariant_speed}.
+\end{enumerate}
+
+\subsection{Discussion}
 
 \begin{enumerate}
-\item \texttt{OnePostulate.Basic.classifyKappa}
-\item \texttt{OnePostulate.SpacetimeMatrices.spacetimeMetricMatrix}
-\item \texttt{OnePostulate.KinematicAlgebra.adjointTraceModel}
-\item \texttt{OnePostulate.KillingForm.killingFormMatrix}
-\item \texttt{OnePostulate.VelocitySpace.velocityMetricMatrix}
-\item \texttt{OnePostulate.SpacetimeRepresentation.representationMetricMatrix}
-\item \texttt{OnePostulate.Selection.preferredBranch}
+\item \texttt{OnePostulate.phase1\_selection\_summary}\label{OnePostulate.phase1_selection_summary}\\
+Kind: theorem.\\
+Depends on: \texttt{OnePostulate.negative_kappa_selects_euclidean}, \texttt{OnePostulate.negative_kappa_no_nonzero_null_vectors}, \texttt{OnePostulate.zero_kappa_selects_galilean}, \texttt{OnePostulate.boost_killing_nondegenerate_iff_kappa_ne_zero}, \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.reducible_of_kappa_zero}, \texttt{OnePostulate.spacetime_metric_degenerate_of_kappa_zero}, \texttt{OnePostulate.selection_of_positive_kappa}.
 \end{enumerate}

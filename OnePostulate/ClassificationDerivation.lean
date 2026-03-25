@@ -1,10 +1,11 @@
 /-
 Deferred phase-1 placeholder for the classification derivation.
 
-The Ignatowski and Bacry-Lévy-Leblond derivation work is intentionally kept
-here, but this module remains unimported during phase 1.
+This module stays out of the phase-1 import graph.
+
+Bacry-Levy-Leblond / Ignatowski material belongs here later, but only as a
+deferred placeholder for now.
 -/
-import OnePostulate.Basic
 
 namespace OnePostulate
 

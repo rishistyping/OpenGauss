@@ -102,9 +102,15 @@ theorem reducible_of_kappa_zero :
 
 theorem spacetime_metric_degenerate_of_kappa_zero :
     ¬ Matrix.Nondegenerate (spacetime_metric 0) := by
-  rw [Matrix.nondegenerate_iff_det_ne_zero]
-  rw [spacetime_metric_eq_diagonal]
-  simp [Matrix.det_diagonal, Fin.prod_univ_four]
+  intro hnondeg
+  have htime_ne : absoluteTimeCovector ≠ 0 := by
+    intro hzero
+    have hentry := congrArg (fun v => v 0) hzero
+    simp [absoluteTimeCovector] at hentry
+  obtain ⟨w, hw⟩ := hnondeg.exists_not_ortho_of_ne_zero htime_ne
+  have horth : dotProduct absoluteTimeCovector (Matrix.mulVec (spacetime_metric 0) w) = 0 := by
+    simp [absoluteTimeCovector, Matrix.mulVec, dotProduct, spacetime_metric, Fin.sum_univ_four]
+  exact hw horth
 
 set_option maxHeartbeats 0 in
 theorem spacetime_metric_congruent_stdLorentz_of_kappa_pos (κ : ℝ) (hκ : 0 < κ) :
@@ -141,8 +147,8 @@ theorem galilean_representation_metric :
   rw [representationMetricMatrix, spacetime_metric_eq_diagonal]
 
 theorem positive_kappa_suggests_lorentzian_behavior (κ : ℝ) (hκ : 0 < κ) :
-    True := by
-  have _ := spacetime_metric_congruent_stdLorentz_of_kappa_pos κ hκ
-  trivial
+    Matrix.transpose (lorentzCongruenceMatrix κ) * spacetime_metric κ * lorentzCongruenceMatrix κ =
+      Matrix.diagonal ![1, -1, -1, -1] := by
+  exact spacetime_metric_congruent_stdLorentz_of_kappa_pos κ hκ
 
 end OnePostulate

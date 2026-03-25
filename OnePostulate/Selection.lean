@@ -91,9 +91,11 @@ theorem selection_of_positive_kappa (κ : ℝ) (hκ : 0 < κ) :
       0 < invariantSpeedSquared κ ∧
       ∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ := by
   refine ⟨positive_kappa_selects_lorentz κ hκ, ?_, ?_, ?_⟩
-  · have hnondeg : Matrix.Nondegenerate (boostKillingBlock κ) := by
-      exact (boost_killing_nondegenerate_iff_kappa_ne_zero κ).2 (ne_of_gt hκ)
-    simpa [velocityMetricMatrix] using hnondeg
+  · have hdet : (velocityMetricMatrix κ).det ≠ 0 := by
+      rw [killing_restricts_to_metric, Matrix.det_diagonal, Fin.prod_univ_three]
+      have hk : (4 * κ : ℝ) ≠ 0 := mul_ne_zero (by norm_num) (ne_of_gt hκ)
+      exact mul_ne_zero (mul_ne_zero hk hk) hk
+    exact Matrix.nondegenerate_of_det_ne_zero hdet
   · exact spacetime_metric_congruent_stdLorentz_of_kappa_pos κ hκ
   · exact positive_kappa_gives_finite_real_invariant_speed κ hκ
 
@@ -128,10 +130,16 @@ theorem phase1_selection_summary (κ : ℝ) :
     obtain ⟨hneqBot, hneqTop, hInvariant⟩ := reducible_of_kappa_zero
     have hboostDegenerate : ¬ Matrix.Nondegenerate (velocityMetricMatrix 0) := by
       intro hnondeg
-      have hnonzero : (0 : ℝ) ≠ 0 := by
-        exact (boost_killing_nondegenerate_iff_kappa_ne_zero 0).1 (by
-          simpa [velocityMetricMatrix] using hnondeg)
-      exact hnonzero rfl
+      have hone : (![1, 0, 0] : SpatialIndex → ℝ) ≠ 0 := by
+        intro hzero
+        have hentry := congrArg (fun v => v 0) hzero
+        simp at hentry
+      rw [velocityMetricMatrix_at_zero] at hnondeg
+      obtain ⟨w, hw⟩ := hnondeg.exists_not_ortho_of_ne_zero hone
+      have horth : dotProduct (![1, 0, 0] : SpatialIndex → ℝ)
+          (Matrix.mulVec (0 : RealSquareMatrix SpatialDim) w) = 0 := by
+        simp [Matrix.mulVec, dotProduct]
+      exact hw horth
     exact ⟨zero_kappa_selects_galilean, hboostDegenerate,
       spacetime_metric_degenerate_of_kappa_zero, hneqBot, hneqTop, hInvariant⟩
   · intro hpos

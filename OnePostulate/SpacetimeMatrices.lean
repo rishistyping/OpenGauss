@@ -49,8 +49,9 @@ def boostMatrix (κ : ℝ) : SpatialIndex → RealSquareMatrix SpacetimeDim
             κ, 0, 0, 0]
 
 theorem spacetimeMetricMatrix_isSymm (κ : ℝ) :
-    True := by
-  sorry
+    Matrix.IsSymm (spacetimeMetricMatrix κ) := by
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp [spacetimeMetricMatrix]
 
 private def jjExpected : SpatialIndex → SpatialIndex → RealSquareMatrix SpacetimeDim
   | 0, 0 => 0
