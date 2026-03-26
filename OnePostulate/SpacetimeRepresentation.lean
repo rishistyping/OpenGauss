@@ -142,6 +142,21 @@ theorem spacetime_metric_congruent_stdLorentz_of_kappa_pos (κ : ℝ) (hκ : 0 <
     fin_cases i <;> simp [htime]
   · simp [Matrix.diagonal_apply_ne, hij]
 
+theorem absoluteTimeCovector_mem_timeLineSubmodule :
+    absoluteTimeCovector ∈ timeLineSubmodule := by
+  simp [absoluteTimeCovector, timeLineSubmodule]
+
+theorem absoluteTimeCovector_invariant_at_kappa_zero (i : SpatialIndex) :
+    Matrix.mulVec (rotMatrix i) absoluteTimeCovector = 0 ∧
+      Matrix.mulVec (boostMatrix 0 i) absoluteTimeCovector = 0 := by
+  constructor
+  · ext j
+    fin_cases i <;> fin_cases j <;>
+      simp [absoluteTimeCovector, Matrix.mulVec, dotProduct, rotMatrix, Fin.sum_univ_four]
+  · ext j
+    fin_cases i <;> fin_cases j <;>
+      simp [absoluteTimeCovector, Matrix.mulVec, dotProduct, boostMatrix, Fin.sum_univ_four]
+
 theorem galilean_representation_metric :
     representationMetricMatrix 0 = Matrix.diagonal ![0, -1, -1, -1] := by
   rw [representationMetricMatrix, spacetime_metric_eq_diagonal]

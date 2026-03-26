@@ -99,6 +99,15 @@ theorem selection_of_positive_kappa (κ : ℝ) (hκ : 0 < κ) :
   · exact spacetime_metric_congruent_stdLorentz_of_kappa_pos κ hκ
   · exact positive_kappa_gives_finite_real_invariant_speed κ hκ
 
+theorem zero_kappa_has_concrete_invariant_time_line :
+    absoluteTimeCovector ∈ timeLineSubmodule ∧
+      (∀ i : SpatialIndex,
+        Matrix.mulVec (rotMatrix i) absoluteTimeCovector = 0 ∧
+          Matrix.mulVec (boostMatrix 0 i) absoluteTimeCovector = 0) := by
+  refine ⟨absoluteTimeCovector_mem_timeLineSubmodule, ?_⟩
+  intro i
+  exact absoluteTimeCovector_invariant_at_kappa_zero i
+
 theorem phase1_selection_summary (κ : ℝ) :
     (κ < 0 →
       preferredBranch κ = Branch.euclidean ∧
@@ -108,6 +117,10 @@ theorem phase1_selection_summary (κ : ℝ) :
       preferredBranch κ = Branch.galilean ∧
         ¬ Matrix.Nondegenerate (velocityMetricMatrix 0) ∧
         ¬ Matrix.Nondegenerate (spacetime_metric 0) ∧
+        absoluteTimeCovector ∈ timeLineSubmodule ∧
+        (∀ i : SpatialIndex,
+          Matrix.mulVec (rotMatrix i) absoluteTimeCovector = 0 ∧
+            Matrix.mulVec (boostMatrix 0 i) absoluteTimeCovector = 0) ∧
         timeLineSubmodule ≠ ⊥ ∧
         timeLineSubmodule ≠ ⊤ ∧
         (∀ i : SpatialIndex, ∀ v : SpacetimeIndex → ℝ, v ∈ timeLineSubmodule →
@@ -127,6 +140,7 @@ theorem phase1_selection_summary (κ : ℝ) :
   constructor
   · intro hzero
     subst hzero
+    obtain ⟨htimeMem, htimeInvariant⟩ := zero_kappa_has_concrete_invariant_time_line
     obtain ⟨hneqBot, hneqTop, hInvariant⟩ := reducible_of_kappa_zero
     have hboostDegenerate : ¬ Matrix.Nondegenerate (velocityMetricMatrix 0) := by
       intro hnondeg
@@ -141,7 +155,8 @@ theorem phase1_selection_summary (κ : ℝ) :
         simp [Matrix.mulVec, dotProduct]
       exact hw horth
     exact ⟨zero_kappa_selects_galilean, hboostDegenerate,
-      spacetime_metric_degenerate_of_kappa_zero, hneqBot, hneqTop, hInvariant⟩
+      spacetime_metric_degenerate_of_kappa_zero, htimeMem, htimeInvariant,
+      hneqBot, hneqTop, hInvariant⟩
   · intro hpos
     exact selection_of_positive_kappa κ hpos
 
