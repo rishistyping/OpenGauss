@@ -14,17 +14,22 @@ Use this document as a high-signal summary first. Treat source files as the fina
 
 ## Branch-Specific Summary: `one-postulate`
 
-Compared with `main`, this branch adds research-paper assets only:
+Compared with `main`, this branch adds a phase-1 Lean formalization surface plus the supporting paper and blueprint assets:
 
+- `OnePostulate.lean`
+- `OnePostulate/`
+- `blueprint/src/content.tex`
 - `paper/one-postulate.tex`
 - `paper/one-postulate.pdf`
 - `paper/.gitkeep`
 
 Important branch fact:
 
-- The `one-postulate` branch does not currently change the runtime codepath relative to `main`.
-- The added `paper/` content is not referenced by Python runtime code, CLI routing, gateway logic, or tests.
-- If a task is about the branch-specific content, the likely target is `paper/one-postulate.tex`.
+- The `one-postulate` branch still does not change the OpenGauss Python runtime codepath relative to `main`.
+- The branch-specific implementation work is concentrated in the Lean files under `OnePostulate/`.
+- The imported phase-1 Lean surface stops at `OnePostulate.Selection`.
+- `OnePostulate.ClassificationDerivation` remains deferred and unimported from `OnePostulate.lean`.
+- If a task is about the branch-specific formalization content, the likely targets are `OnePostulate/`, `blueprint/src/content.tex`, and `paper/one-postulate.tex`.
 
 ### One-Postulate Paper Summary
 
@@ -41,6 +46,25 @@ Practical note:
 
 - `paper/one-postulate.tex` is the editable source.
 - `paper/one-postulate.pdf` is the built artifact.
+
+## OnePostulate Phase-1 Theorem Map
+
+- Bracket table: `OnePostulate.kinematic_bracket_table`
+  Maps the paper's homogeneous commutator table for `J_i` and `K_i`.
+- Jacobi: `OnePostulate.kinematic_bracket_jacobi`
+  Packages the Jacobi identity for the six-dimensional phase-1 kinematic algebra.
+- Killing form: `OnePostulate.killing_form_diag`, `OnePostulate.boost_killing_form_eq`, `OnePostulate.boost_killing_nondegenerate_iff_kappa_ne_zero`
+  Covers the explicit diagonal Killing form computation and the boost-sector nondegeneracy split by `κ`.
+- Zero-branch conformal-only surface: `OnePostulate.boost_invariant_form_scalar`, `OnePostulate.killing_restricts_to_metric`, `OnePostulate.velocityMetricMatrix_at_zero`
+  This is the current phase-1 Lean surface for the paper's "conformal class only at κ = 0" claim; it is represented by these combined lemmas rather than a stronger dedicated theorem.
+- Spacetime metric invariance: `OnePostulate.spacetime_metric_invariant`
+  Formalizes invariance of the explicit spacetime metric under the matrix generators.
+- Positive-branch Lorentz congruence: `OnePostulate.spacetime_metric_congruent_stdLorentz_of_kappa_pos`
+  Gives the explicit congruence to standard Lorentz signature when `κ > 0`.
+- Zero-branch reducibility: `OnePostulate.reducible_of_kappa_zero`, `OnePostulate.spacetime_metric_degenerate_of_kappa_zero`
+  Captures the invariant time line and metric degeneracy at `κ = 0`.
+- Final `κ < 0 / κ = 0 / κ > 0` trichotomy: `OnePostulate.phase1_selection_summary`
+  Packages the phase-1 branch consequences for the Euclidean, Galilean, and Lorentzian cases.
 
 ## What This Repository Actually Is
 
@@ -365,6 +389,7 @@ Useful terms for semantic retrieval:
 For this branch:
 
 - The main product remains the OpenGauss Python runtime and Lean workflow orchestrator.
-- The only branch-specific addition is the `paper/one-postulate.*` content.
+- The branch-specific additions are the `OnePostulate` Lean library, the declaration ledger in `blueprint/src/content.tex`, and the `paper/one-postulate.*` assets.
 - If future work is about runtime behavior, start in the Python architecture files.
-- If future work is about the branch theme or research content, start in `paper/one-postulate.tex`.
+- If future work is about the phase-1 formalization, start in `OnePostulate/`.
+- If future work is about the paper narrative or declaration ledger, start in `paper/one-postulate.tex` and `blueprint/src/content.tex`.

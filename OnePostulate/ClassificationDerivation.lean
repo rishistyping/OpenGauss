@@ -52,7 +52,9 @@ theorem classification_negative_branch (κ : ℝ) (hκ : κ < 0) :
 
 theorem classification_zero_branch :
     classificationZeroBranch := by
-  exact (phase1_selection_summary 0).2.1 rfl
+  obtain ⟨hbranch, hvelDeg, hspaceDeg, htimeMem, htimeInv, hneqBot, hneqTop, _⟩ :=
+    (phase1_selection_summary 0).2.1 rfl
+  exact ⟨hbranch, hvelDeg, hspaceDeg, htimeMem, htimeInv, hneqBot, hneqTop⟩
 
 theorem classification_positive_branch (κ : ℝ) (hκ : 0 < κ) :
     classificationPositiveBranch κ := by

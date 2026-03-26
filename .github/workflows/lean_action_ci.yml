@@ -11,4 +11,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+      - name: Guard phase-1 OnePostulate surface
+        run: |
+          if grep -nE 'sorry|admit' OnePostulate.lean OnePostulate/*.lean; then
+            echo 'Found sorry/admit in phase-1 OnePostulate files'
+            exit 1
+          fi
+
+          if grep -nE '^[[:space:]]*import[[:space:]]+OnePostulate\.ClassificationDerivation([[:space:]]|$)' OnePostulate.lean; then
+            echo 'OnePostulate.lean must not import OnePostulate.ClassificationDerivation during phase 1'
+            exit 1
+          fi
       - uses: leanprover/lean-action@v1
+      - name: Check deferred classification module
+        run: lake env lean OnePostulate/ClassificationDerivation.lean
